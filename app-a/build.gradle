@@ -1,0 +1,8 @@
+dependencies {
+    implementation project(':x-tracing-starter')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-amqp')
+    implementation('org.springframework.boot:spring-boot-starter-data-redis')
+    implementation('org.springframework.cloud:spring-cloud-starter-openfeign')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+}

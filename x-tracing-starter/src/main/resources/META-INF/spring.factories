@@ -1,0 +1,6 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.wcyv90.spring.opentracing.XOpenTracingConfiguration
+
+org.springframework.boot.env.EnvironmentPostProcessor=\
+com.wcyv90.spring.opentracing.environment.SleuthLikeLogEnvironmentPostProcessor

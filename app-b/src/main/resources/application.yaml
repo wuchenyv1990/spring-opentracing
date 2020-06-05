@@ -1,0 +1,45 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: app-b
+  rabbitmq:
+    username: admin
+    password: admin
+    addresses: localhost
+    virtual-host: /
+    listener:
+      simple:
+        acknowledge-mode: auto
+    connection-timeout: 3000
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: >
+      jdbc:mysql://127.0.0.1:3306/test_trace_db
+      ?allowMultiQueries=true
+      &allowPublicKeyRetrieval=true
+      &useUnicode=true
+      &useSSL=false
+      &characterEncoding=utf-8
+      &connectionCollation=utf8mb4_bin
+      &serverTimezone=UTC
+    username: root
+    password: root
+
+mybatis:
+  config-location: classpath:mybatis/config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+opentracing:
+  jaeger:
+    enabled: true
+    enable128-bit-traces: true
+    enable-b3-propagation: true
+    log-spans: false
+    log-span-detail: false
+    probabilistic-sampler:
+      sampling-rate: 1
+    udp-sender:
+      host: localhost
+      port: 6831

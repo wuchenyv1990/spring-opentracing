@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: app-a
+  rabbitmq:
+    username: admin
+    password: admin
+    addresses: localhost
+    virtual-host: /
+    listener:
+      simple:
+        acknowledge-mode: auto
+    connection-timeout: 3000
+
+opentracing:
+  jaeger:
+    enabled: true
+    enable128-bit-traces: true
+    enable-b3-propagation: true
+    log-spans: false
+    log-span-detail: true
+    probabilistic-sampler:
+      sampling-rate: 1
+    udp-sender:
+      host: localhost
+      port: 6831

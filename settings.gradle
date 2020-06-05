@@ -1,0 +1,4 @@
+rootProject.name = 'spring-opentracing'
+include 'app-a'
+include 'app-b'
+include 'x-tracing-starter'

@@ -1,0 +1,71 @@
+buildscript {
+    ext {
+        apacheCollectionsVersion = '4.4'
+        commonsLangVersion = '3.9'
+        lombokVersion = '4.1.6'
+        mybatisStarterVersion = '2.1.1'
+        mysqlVersion = '8.0.20'
+        springDependenciesVersion = '1.0.9.RELEASE'
+        springbootVersion = '2.3.0.RELEASE'
+        springCloudVersion = 'Hoxton.SR4'
+        swaggerVersion = '2.9.2'
+        jaegerCloudStarterVersion = '3.1.1'
+        jaegerRabbitVersion = '3.0.0' //当前rabbit依赖api版本落后，待后续发布会更新
+    }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'java'
+    id("io.spring.dependency-management") version "${springDependenciesVersion}"
+    id "io.freefair.lombok" version "${lombokVersion}" apply false
+    id("org.springframework.boot") version "${springbootVersion}" apply false
+}
+
+apply from: "$rootDir/mybatis-generator.gradle"
+
+allprojects {
+    group 'com.wcyv90'
+    version '1.0-SNAPSHOT'
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    java {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'io.freefair.lombok'
+    //几种配置方式
+    dependencyManagement {
+        imports {
+            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            mavenBom "org.apache.commons:commons-lang3:${commonsLangVersion}"
+        }
+        dependencies {
+            dependency "org.apache.commons:commons-collections4:${apacheCollectionsVersion}"
+            dependency "io.opentracing.contrib:opentracing-spring-jaeger-cloud-starter:${jaegerCloudStarterVersion}"
+            dependency "io.opentracing.contrib:opentracing-spring-rabbitmq-starter:${jaegerRabbitVersion}"
+            dependency "mysql:mysql-connector-java:${mysqlVersion}"
+            dependency "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisStarterVersion}"
+        }
+
+    }
+}
+
+project(":app-a") {
+    apply plugin: "org.springframework.boot"
+}
+
+project(":app-b") {
+    apply plugin: "org.springframework.boot"
+}

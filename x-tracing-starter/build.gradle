@@ -1,0 +1,7 @@
+dependencies {
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    implementation('org.springframework.boot:spring-boot-starter-json')
+    implementation('io.opentracing.contrib:opentracing-spring-jaeger-cloud-starter')
+}
+//if use additional-spring-configuration-metadata.json
+compileJava.dependsOn(processResources)
