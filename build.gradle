@@ -7,10 +7,10 @@ buildscript {
         mysqlVersion = '8.0.20'
         springDependenciesVersion = '1.0.9.RELEASE'
         springbootVersion = '2.3.0.RELEASE'
-        springCloudVersion = 'Hoxton.SR4'
+        springCloudVersion = 'Hoxton.SR5'
         swaggerVersion = '2.9.2'
-        jaegerCloudStarterVersion = '3.1.1'
-        jaegerRabbitVersion = '3.0.0' //当前rabbit依赖api版本落后，待后续发布会更新
+        jaegerCloudStarterVersion = '3.1.2'
+//        jaegerRabbitVersion = '3.0.0' //3.1.1 rabbit依赖api版本落后，待后续发布会更新
     }
     repositories {
         mavenLocal()
@@ -54,7 +54,7 @@ subprojects {
         dependencies {
             dependency "org.apache.commons:commons-collections4:${apacheCollectionsVersion}"
             dependency "io.opentracing.contrib:opentracing-spring-jaeger-cloud-starter:${jaegerCloudStarterVersion}"
-            dependency "io.opentracing.contrib:opentracing-spring-rabbitmq-starter:${jaegerRabbitVersion}"
+//            dependency "io.opentracing.contrib:opentracing-spring-rabbitmq-starter:${jaegerRabbitVersion}"
             dependency "mysql:mysql-connector-java:${mysqlVersion}"
             dependency "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisStarterVersion}"
         }
